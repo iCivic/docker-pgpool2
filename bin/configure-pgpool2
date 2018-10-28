@@ -39,7 +39,7 @@ def write(template, path):
 		output.write(template)
 
 if __name__ == "__main__":
-	# Initialize Jinja2
+	# Initialize Jinja2	
 	loader = FileSystemLoader('/usr/share/pgpool2')
 	templates = Environment(loader = loader)
 	# Load the configuration into a dictionary.
