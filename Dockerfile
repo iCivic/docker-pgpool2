@@ -50,13 +50,17 @@ RUN chmod +x /usr/bin/configure-pgpool2
 ADD conf/pcp.conf.template /usr/share/pgpool2/pcp.conf.template
 ADD conf/pgpool.conf.template /usr/share/pgpool2/pgpool.conf.template
 ADD conf/pool_hba.conf /etc/pgpool2/pool_hba.conf
+ADD conf/pool_passwd /etc/pgpool2/pool_passwd
 
 # Start the container.
 COPY docker-entrypoint.sh /
 RUN chmod +x /docker-entrypoint.sh
 ENTRYPOINT ["/docker-entrypoint.sh"]
 
+VOLUME /etc/pgpool2
+
 EXPOSE 9999 9898
+WORKDIR /etc/pgpool2
 
 CMD ["pgpool","-n", "-f", "/etc/pgpool2/pgpool.conf", "-F", "/etc/pgpool2/pcp.conf", "-a", "/etc/pgpool2/pool_hba.conf"]
 
